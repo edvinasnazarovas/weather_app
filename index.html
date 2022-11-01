@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="style.css">
+<meta charset="utf-8">
+<title>Page Title</title>
+<body>
+    <h1>Weather</h1>
+    <p id="b">Paragraph</p>
+    <p id="a">Paragraph</p>
+    <p id="c">Observation time: </p>
+    <img id="d" src="" alt="Image">
+
+    <script>
+        let params = new URLSearchParams({
+            access_key: '73ea63d794f96ea9007f36b17f10450a',
+            query: 'Vilnius, Lithuania',
+            units: 'm',
+    });
+    const api_url = `http://api.weatherstack.com/current?${params}`;
+    
+        fetch(`http://api.weatherstack.com/current?${params}`)
+        .then(res=> res.json()).then(data => document.getElementById("a").innerHTML = data.current.temperature)
+
+        fetch(`http://api.weatherstack.com/current?${params}`).then(res => res.json()).then(data => 
+        document.getElementById("b").innerHTML = data.location.name)
+
+        fetch(`http://api.weatherstack.com/current?${params}`).then(res => res.json()).then(data => 
+        document.getElementById("c").innerHTML += data.current.observation_time)
+
+        fetch(`http://api.weatherstack.com/current?${params}`).then(res => res.json()).then(data => 
+        document.getElementById("d").src = data.current.weather_icons)
+
+
+    </script>
+</body>
+</html>
