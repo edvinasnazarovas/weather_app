@@ -18,3 +18,8 @@ background: radial-gradient(circle, rgba(255,120,224,1) 0%, rgba(133,234,255,1) 
     width: 30%;
     padding: 10px;
 }
+
+.weather {
+    background-color: rgba(228, 174, 250, 0.377);
+    border-radius: 25px;
+}
