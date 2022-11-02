@@ -1,6 +1,6 @@
 body{
-    background: rgb(255,120,224);
-background: radial-gradient(circle, rgba(255,120,224,1) 0%, rgba(133,234,255,1) 100%);
+    background: rgb(255,120,63);
+background: radial-gradient(circle, rgba(255,120,63,1) 0%, rgba(255,114,179,1) 100%);
 }
 
 .center {
@@ -12,14 +12,18 @@ background: radial-gradient(circle, rgba(255,120,224,1) 0%, rgba(133,234,255,1) 
     border-radius: 25px;
 }
 
-.center p, h1{
+.center p, h1, h3{
     color: white;
     margin: auto;
-    width: 30%;
+    width: 20%;
     padding: 10px;
 }
 
 .weather {
-    background-color: rgba(228, 174, 250, 0.377);
+    background-color: rgba(228, 174, 250, 0.174);
     border-radius: 25px;
+}
+
+.highlow, .temperatures {
+    display: flex;
 }
