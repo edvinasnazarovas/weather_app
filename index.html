@@ -13,13 +13,7 @@
                 <p id="h">H: </p>
                 <p id="l">L: </p>
             </div>
-            <div class="temperatures">
-                <p id="temp1">Temp</p>
-                <p id="temp2">Temp</p>
-                <p id="temp3">Temp</p>
-                <p id="temp4">Temp</p>
-                <p id="temp5">Temp</p>
-                <p id="temp6">Temp</p>
+            <div id="temperatures">
             </div>
         </div>
     </section>
@@ -39,44 +33,33 @@
         fetch(`https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&hourly=temperature_2m`)
         .then(res => res.json()).then(data => console.log(data))
 
-        fetch(`https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&hourly=temperature_2m`)
-        .then(res => res.json()).then(data => document.getElementById("c").innerHTML += data.hourly.time[1])
-
         fetch(`https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&hourly=temperature_2m&daily=temperature_2m_max,temperature_2m_min&timezone=Europe%2FBerlin`)
         .then(res => res.json()).then(data => document.getElementById("l").innerHTML += data.daily.temperature_2m_min[0])
 
         fetch(`https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&hourly=temperature_2m&daily=temperature_2m_max,temperature_2m_min&timezone=Europe%2FBerlin`)
         .then(res => res.json()).then(data => document.getElementById("h").innerHTML += data.daily.temperature_2m_max[0])
 
-        fetch(`https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&hourly=temperature_2m&daily=temperature_2m_max,temperature_2m_min&timezone=Europe%2FBerlin`)
-        .then(res => res.json()).then(data => document.getElementById("temp1").innerHTML = data.hourly.temperature_2m[0])
+        fetchTemperatures();
 
-        fetch(`https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&hourly=temperature_2m&daily=temperature_2m_max,temperature_2m_min&timezone=Europe%2FBerlin`)
-        .then(res => res.json()).then(data => document.getElementById("temp2").innerHTML = data.hourly.temperature_2m[1])
+        //Get temperatures and pass to .temp
+        async function fetchTemperatures() {
 
-        fetch(`https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&hourly=temperature_2m&daily=temperature_2m_max,temperature_2m_min&timezone=Europe%2FBerlin`)
-        .then(res => res.json()).then(data => document.getElementById("temp3").innerHTML = data.hourly.temperature_2m[2])
+        let response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&hourly=temperature_2m&daily=temperature_2m_max,temperature_2m_min&timezone=Europe%2FBerlin`)
+        let temps = await response.json()
 
-        fetch(`https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&hourly=temperature_2m&daily=temperature_2m_max,temperature_2m_min&timezone=Europe%2FBerlin`)
-        .then(res => res.json()).then(data => document.getElementById("temp4").innerHTML = data.hourly.temperature_2m[3])
+        document.getElementById("a").innerHTML = temps.hourly.temperature_2m[16];
 
-        fetch(`https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&hourly=temperature_2m&daily=temperature_2m_max,temperature_2m_min&timezone=Europe%2FBerlin`)
-        .then(res => res.json()).then(data => document.getElementById("temp5").innerHTML = data.hourly.temperature_2m[4])
-
-        fetch(`https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&hourly=temperature_2m&daily=temperature_2m_max,temperature_2m_min&timezone=Europe%2FBerlin`)
-        .then(res => res.json()).then(data => document.getElementById("temp6").innerHTML = data.hourly.temperature_2m[5])
-
-
-        var isDay;
-
-        fetch(`https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&hourly=temperature_2m`)
-        .then(res=> res.json()).then(data => isDay = data.elevation)
-
-        if(isDay == "no"){
-            console.log("It's night");
-        } else {
-            console.log("It's day");
+        for(var i = 0; i < 4; i++) {
+            console.log(temps.hourly.temperature_2m[i]);
+            //document.querySelectorAll(".temp")[i].innerHTML = temps.hourly.temperature_2m[i];
+            
+            var tag = document.createElement("p");
+            var text = document.createTextNode(temps.hourly.temperature_2m[i]);
+            tag.appendChild(text);
+            var element = document.getElementById("temperatures");
+            element.appendChild(tag);
         }
+    }
 
 
         //fetch(`http://api.weatherstack.com/current?${params}`).then(res => res.json()).then(data => 
