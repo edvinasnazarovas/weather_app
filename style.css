@@ -24,6 +24,6 @@ background: radial-gradient(circle, rgba(255,120,63,1) 0%, rgba(255,114,179,1) 1
     border-radius: 25px;
 }
 
-.highlow, .temperatures {
+.highlow, #temperatures{
     display: flex;
 }
